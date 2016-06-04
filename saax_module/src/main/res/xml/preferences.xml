@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <de.robv.android.xposed.library.ui.TextViewPreference
+        android:selectable="false"
+        textcolor="#000000"
+        android:title="@string/headerTitle" />
+
+    <de.robv.android.xposed.library.ui.SeparatorPreference height="3" />
+
+    <de.robv.android.xposed.library.ui.ValueSeekBarPreference
+        displayFormat="%d taps"
+        max="999"
+        min="1"
+        android:defaultValue="6"
+        android:key="pref_maxTaps"
+        android:summary="@string/vsb1summary"
+        android:title="@string/vsb1title" />
+
+    <de.robv.android.xposed.library.ui.ValueSeekBarPreference
+        displayFormat="%d mph"
+        max="150"
+        min="1"
+        android:defaultValue="1"
+        android:key="pref_maxSpeed"
+        android:summary="@string/vsb2summary"
+        android:title="@string/vsb2title" />
+
+    <de.robv.android.xposed.library.ui.TextViewPreference
+        android:selectable="false"
+        textcolor="#000000"
+        android:title="@string/debug_divider" />
+
+    <de.robv.android.xposed.library.ui.SeparatorPreference height="3" />
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="debug"
+        android:summary="@string/debug_summary"
+        android:title="@string/debug_title" />
+
+</PreferenceScreen>

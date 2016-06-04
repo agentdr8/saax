@@ -1,0 +1,3 @@
+int id valueseekbar_preference_seekbar 0x7f030000
+int id valueseekbar_preference_value 0x7f030001
+int layout preference_valueseekbar_extension 0x7f020000

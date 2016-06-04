@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="debug"><source path="/home/drait/androidstudio/AAX/xposedLibrary/build/intermediates/bundles/debug/assets"/></dataSet><dataSet config="main"><source path="/home/drait/androidstudio/AAX/xposedLibrary/src/androidTest/assets"/><source path="/home/drait/androidstudio/AAX/xposedLibrary/build/generated/assets/shaders/androidTest/debug"/></dataSet></merger>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SAAX</string>
+    <string name="alert_title">SAAX Disclaimer</string>
+    <string name="disclaimer">This module can alter the built-in safety features that Google has implemented in Android Auto. By clicking \"I Agree\", you agree that YOU, and only YOU, are solely responsible for any negative repercussions that may result. This can include injury to yourself and/or others, property damage, or loss of life. Under no circumstances is the author of this module responsible for its use!"</string>
+    <string name="headerTitle">Sensible Android Auto:Xposed - Settings</string>
+    <string name="vsb1summary">Maximum # of screen taps while vehicle in motion before warning screen</string>
+    <string name="vsb1title">Screen Taps</string>
+    <string name="vsb2summary">Maximum speed before parking warning screen</string>
+    <string name="vsb2title">Unlimited Browse Speed</string>
+
+    <string name="debug_divider">Debugging Options</string>
+
+    <string name="debug_title">Debug</string>
+    <string name="debug_summary">Enable debug output to log to Xposed error.log</string>
+</resources>
