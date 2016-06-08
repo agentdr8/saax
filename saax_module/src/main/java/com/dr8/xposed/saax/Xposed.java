@@ -65,9 +65,10 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                             if (s.equals("gearhead:max_speed_unlimited_browsing") ||
                                     s.equals("gearhead:max_speed_parking_card")) {
                                 if (DEBUG) log(TAG, s + " is currently: " + f);
-                                param.args[1] = (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704;
+                                float tmpflt = (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704F;
+                                param.args[1] = tmpflt;
                                 if (DEBUG) log(TAG, "setting " + s + " to " +
-                                        (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704);
+                                        tmpflt);
                             }
                         }
                     });
