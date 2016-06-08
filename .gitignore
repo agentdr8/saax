@@ -6,3 +6,7 @@
 .DS_Store
 /build
 /captures
+/xposedLibrary/build/
+/saax_module/build/
+/saax_module/src/androidTest/
+/saax_module/src/test/
