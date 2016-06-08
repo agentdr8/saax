@@ -47,9 +47,9 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                             String s = (String) param.args[0];
                             int i = (int) param.args[1];
                             if (s.equals("gearhead:max_forward_clicks")) {
-                                if (DEBUG) log(TAG, "max_fwd_clicks is currently: " + i);
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
                                 param.args[1] = prefs.getInt("pref_maxTaps", 6);
-                                if (DEBUG) log(TAG, "setting max_fwd_clicks to " +
+                                if (DEBUG) log(TAG, "setting " + s + " to " +
                                         prefs.getInt("pref_maxTaps", 6));
                             }
                         }
@@ -62,11 +62,12 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                             prefs.reload();
                             String s = (String) param.args[0];
                             float f = (float) param.args[1];
-                            if (s.equals("gearhead:max_speed_unlimited_browsing")) {
-                                if (DEBUG) log(TAG, "max_spd_unl is currently: " + f);
-                                param.args[1] = (float) prefs.getInt("pref_maxSpeed", 150);
-                                if (DEBUG) log(TAG, "setting max_spd_unl to " +
-                                        (float) prefs.getInt("pref_maxSpeed", 150));
+                            if (s.equals("gearhead:max_speed_unlimited_browsing") ||
+                                    s.equals("gearhead:max_speed_parking_card")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + f);
+                                param.args[1] = (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704;
+                                if (DEBUG) log(TAG, "setting " + s + " to " +
+                                        (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704);
                             }
                         }
                     });

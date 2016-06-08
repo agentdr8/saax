@@ -2,10 +2,7 @@
 /local.properties
 /.idea/workspace.xml
 /.idea/libraries
-.DS_Store
 /build
-/captures
-/xposedLibrary/build/
 /saax_module/build/
-/saax_module/src/androidTest/
-/saax_module/src/test/
+.idea/copyright/
+/xposedLibrary/build/
