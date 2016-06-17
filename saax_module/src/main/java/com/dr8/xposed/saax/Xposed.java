@@ -36,11 +36,37 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         String targetpkg = "com.google.android.projection.gearhead";
         String targetcls = "com.google.android.gsf.e";
+        String targetdslcls = "com.google.android.gms.car.DefaultSensorListener";
 
         if (lpparam.packageName.equals(targetpkg)) {
             if (DEBUG) log(TAG, "Hooked Android Auto package");
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class,
-                    Integer.class, new XC_MethodHook() {
+
+            Class<?> DSLcls = XposedHelpers.findClass(targetdslcls, lpparam.classLoader);
+
+            XposedBridge.hookMethod(XposedHelpers.findMethodBestMatch(DSLcls, "a", Integer.class), new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            int i = (int) param.args[0];
+                            if (i == 101) {
+                                param.args[0] = 100;
+                                if (DEBUG) log(TAG, "Changing ParkingBrakeData to: " + i);
+                            }
+                        }
+                    });
+
+            XposedBridge.hookMethod(XposedHelpers.findMethodBestMatch(DSLcls, "a", Float.class), new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            float i = (float) param.args[0];
+                            if (i < 0.5F && i > -0.5F) {
+                                param.args[0] = 0F;
+                                if (DEBUG) log(TAG, "Changing CarSpeedData to: " + i);
+                            }
+                        }
+                    });
+
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Integer.class,
+                    new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             prefs.reload();
@@ -55,8 +81,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class,
-                    Float.class, new XC_MethodHook() {
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Float.class,
+                    new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
                             prefs.reload();
