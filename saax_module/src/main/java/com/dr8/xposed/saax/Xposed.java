@@ -56,10 +56,6 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                             if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (GearData)");
                             param.setResult(null);
                             break;
-                        case 11:
-                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (DrivingStatusData)");
-                            param.setResult(null);
-                            break;
                         default:
                     }
                 }
