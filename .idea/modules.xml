@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AAX.iml" filepath="$PROJECT_DIR$/AAX.iml" />
+      <module fileurl="file://$PROJECT_DIR$/saax.iml" filepath="$PROJECT_DIR$/saax.iml" />
       <module fileurl="file://$PROJECT_DIR$/saax_module/saax_module.iml" filepath="$PROJECT_DIR$/saax_module/saax_module.iml" />
       <module fileurl="file://$PROJECT_DIR$/xposedLibrary/xposedLibrary.iml" filepath="$PROJECT_DIR$/xposedLibrary/xposedLibrary.iml" />
     </modules>
