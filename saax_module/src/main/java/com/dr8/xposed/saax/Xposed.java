@@ -38,7 +38,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         String targetpkg = "com.google.android.projection.gearhead";
         String targetcls = "com.google.android.gsf.e";
-        String targetcls2 = "com.google.android.projection.gearhead.sdk";
+        String targetcls2 = "com.google.android.projection.gearhead.sdk.r";
         String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
 
 
