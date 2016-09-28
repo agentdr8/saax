@@ -7,6 +7,8 @@
     <string name="vsb1title">Screen Taps</string>
     <string name="vsb2summary">Maximum speed before parking warning screen</string>
     <string name="vsb2title">Unlimited Browse Speed</string>
+    <string name="vsb3summary">Number of pages shown in list views</string>
+    <string name="vsb3title">Unlimited Browse Pages</string>
 
     <string name="debug_divider">Debugging Options</string>
 

@@ -26,6 +26,15 @@
         android:summary="@string/vsb2summary"
         android:title="@string/vsb2title" />
 
+    <de.robv.android.xposed.library.ui.ValueSeekBarPreference
+        displayFormat="%d pages"
+        max="999"
+        min="5"
+        android:defaultValue="100"
+        android:key="pref_maxPages"
+        android:summary="@string/vsb3summary"
+        android:title="@string/vsb3title" />
+
     <de.robv.android.xposed.library.ui.TextViewPreference
         android:selectable="false"
         textcolor="#000000"

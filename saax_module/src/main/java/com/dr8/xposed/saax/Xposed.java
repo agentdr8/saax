@@ -39,6 +39,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         String targetpkg = "com.google.android.projection.gearhead";
         String targetcls = "com.google.android.gsf.e";
         String targetcls2 = "com.google.android.projection.gearhead.sdk.r";
+
+//        String targetubplvcls = "com.google.android.gms.car.support.UnlimitedBrowsePagedListView";
         String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
 
 
@@ -103,14 +105,30 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            prefs.reload();
                             Bundle b = (Bundle) param.args[0];
                             int pages = b.getInt("com.google.android.projection.gearhead.sdk.MAX_PAGES");
-                            if (DEBUG) log(TAG, "MAX_PAGES is " + pages + ", setting to 100");
-                            b.putInt("com.google.android.projection.gearhead.sdk.MAX_PAGES", 100);
+                            if (DEBUG) log(TAG, "MAX_PAGES is " + pages + ", setting to " + prefs.getInt("pref_maxPages",
+                                    5));
+                            b.putInt("com.google.android.projection.gearhead.sdk.MAX_PAGES", prefs.getInt("pref_maxPages",
+                                    5));
                         }
 
                     });
 
+            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "e", Boolean.class,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            prefs.reload();
+                            boolean flag = (boolean) param.args[0];
+                            if (DEBUG) log(TAG, "e(bool flag) is " + flag);
+                            if (!flag) {
+                                if (DEBUG) log(TAG, "Setting e(bool flag) to true");
+                                param.args[0] = true;
+                            }
+                        }
+                    });
         }
 
     }
