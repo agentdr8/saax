@@ -120,7 +120,6 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            prefs.reload();
                             boolean flag = (boolean) param.args[0];
                             if (DEBUG) log(TAG, "e(bool flag) is " + flag);
                             if (!flag) {
