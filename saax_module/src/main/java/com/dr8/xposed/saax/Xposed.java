@@ -1,5 +1,7 @@
 package com.dr8.xposed.saax;
 
+import android.os.Bundle;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -14,11 +16,11 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
 public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
-    public static boolean DEBUG = false;
+    private static boolean DEBUG = false;
     private static String TAG = "SAAX: ";
     private static XSharedPreferences prefs;
 
-    public static void log(String tag, String msg) {
+    private static void log(String tag, String msg) {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         String formattedDate = df.format(c.getTime());
@@ -36,6 +38,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         String targetpkg = "com.google.android.projection.gearhead";
         String targetcls = "com.google.android.gsf.e";
+        String targetcls2 = "com.google.android.projection.gearhead.sdk";
         String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
 
 
@@ -60,6 +63,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                     }
                 }
             });
+
 
             XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Integer.class,
                     new XC_MethodHook() {
@@ -93,6 +97,18 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                                         tmpflt);
                             }
                         }
+                    });
+
+            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "b", Bundle.class,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                            Bundle b = (Bundle) param.args[0];
+                            int pages = b.getInt("com.google.android.projection.gearhead.sdk.MAX_PAGES");
+                            if (DEBUG) log(TAG, "MAX_PAGES is " + pages + ", setting to 100");
+                            b.putInt("com.google.android.projection.gearhead.sdk.MAX_PAGES", 100);
+                        }
+
                     });
 
         }
