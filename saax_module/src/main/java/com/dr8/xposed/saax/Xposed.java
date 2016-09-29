@@ -116,18 +116,18 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "e", Boolean.class,
-                    new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            boolean flag = (boolean) param.args[0];
-                            if (DEBUG) log(TAG, "e(bool flag) is " + flag);
-                            if (!flag) {
-                                if (DEBUG) log(TAG, "Setting e(bool flag) to true");
-                                param.args[0] = true;
-                            }
-                        }
-                    });
+//            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "e", Boolean.class,
+//                    new XC_MethodHook() {
+//                        @Override
+//                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                            boolean flag = (boolean) param.args[0];
+//                            if (DEBUG) log(TAG, "e(bool flag) is " + flag);
+//                            if (!flag) {
+//                                if (DEBUG) log(TAG, "Setting e(bool flag) to true");
+//                                param.args[0] = true;
+//                            }
+//                        }
+//                    });
         }
 
     }
