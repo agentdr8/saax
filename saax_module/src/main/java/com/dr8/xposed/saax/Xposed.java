@@ -37,10 +37,9 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
         String targetpkg = "com.google.android.projection.gearhead";
-        String targetcls = "com.google.android.gsf.e";
-        String targetcls2 = "com.google.android.projection.gearhead.sdk.r";
+        String targetcls = "com.google.android.b.b";
+        String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 
-//        String targetubplvcls = "com.google.android.gms.car.support.UnlimitedBrowsePagedListView";
         String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
 
 
@@ -67,7 +66,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
             });
 
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Integer.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "b", String.class, Integer.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -83,7 +82,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Float.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "b", String.class, Float.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
