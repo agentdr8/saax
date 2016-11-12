@@ -40,33 +40,33 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         String targetcls = "com.google.android.b.b";
         String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 
-        String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
+//        String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
 
 
         if (lpparam.packageName.equals(targetpkg)) {
             if (DEBUG) log(TAG, "Hooked Android Auto package");
 
-            Class<?> CSEcls = XposedHelpers.findClass(targetcsecls, lpparam.classLoader);
-            XposedBridge.hookAllConstructors(CSEcls, new XC_MethodHook() {
-                @Override
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    int b = (int) param.args[1];
-                    switch (b) {
-                        case 6:
-                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (ParkingBrakeData)");
-                            param.setResult(null);
-                            break;
-                        case 7:
-                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (GearData)");
-                            param.setResult(null);
-                            break;
-                        default:
-                    }
-                }
-            });
+//            Class<?> CSEcls = XposedHelpers.findClass(targetcsecls, lpparam.classLoader);
+//            XposedBridge.hookAllConstructors(CSEcls, new XC_MethodHook() {
+//                @Override
+//                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                    int b = (int) param.args[1];
+//                    switch (b) {
+//                        case 6:
+//                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (ParkingBrakeData)");
+//                            param.setResult(null);
+//                            break;
+//                        case 7:
+//                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (GearData)");
+//                            param.setResult(null);
+//                            break;
+//                        default:
+//                    }
+//                }
+//            });
 
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "b", String.class, Integer.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Integer.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -82,7 +82,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "b", String.class, Float.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Float.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
