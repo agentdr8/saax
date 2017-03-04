@@ -66,7 +66,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //            });
 
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Integer.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "d", String.class, Integer.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
@@ -82,25 +82,25 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Float.class,
-                    new XC_MethodHook() {
-                        @Override
-                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                            prefs.reload();
-                            String s = (String) param.args[0];
-                            float f = (float) param.args[1];
-                            if (s.equals("gearhead:max_speed_unlimited_browsing") ||
-                                    s.equals("gearhead:max_speed_parking_card")) {
-                                if (DEBUG) log(TAG, s + " is currently: " + f);
-                                float tmpflt = (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704F;
-                                param.args[1] = tmpflt;
-                                if (DEBUG) log(TAG, "setting " + s + " to " +
-                                        tmpflt);
-                            }
-                        }
-                    });
+//            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Float.class,
+//                    new XC_MethodHook() {
+//                        @Override
+//                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+//                            prefs.reload();
+//                            String s = (String) param.args[0];
+//                            float f = (float) param.args[1];
+//                            if (s.equals("gearhead:max_speed_unlimited_browsing") ||
+//                                    s.equals("gearhead:max_speed_parking_card")) {
+//                                if (DEBUG) log(TAG, s + " is currently: " + f);
+//                                float tmpflt = (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704F;
+//                                param.args[1] = tmpflt;
+//                                if (DEBUG) log(TAG, "setting " + s + " to " +
+//                                        tmpflt);
+//                            }
+//                        }
+//                    });
 
-            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "b", Bundle.class,
+            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "E", Bundle.class,
                     new XC_MethodHook() {
                         @Override
                         protected void afterHookedMethod(MethodHookParam param) throws Throwable {
