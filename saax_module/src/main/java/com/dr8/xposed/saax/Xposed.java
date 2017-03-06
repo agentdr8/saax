@@ -40,31 +40,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         String targetcls = "com.google.android.b.b";
         String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 
-//        String targetcsecls = "com.google.android.gms.car.CarSensorEvent";
-
-
         if (lpparam.packageName.equals(targetpkg)) {
             if (DEBUG) log(TAG, "Hooked Android Auto package");
-
-//            Class<?> CSEcls = XposedHelpers.findClass(targetcsecls, lpparam.classLoader);
-//            XposedBridge.hookAllConstructors(CSEcls, new XC_MethodHook() {
-//                @Override
-//                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                    int b = (int) param.args[1];
-//                    switch (b) {
-//                        case 6:
-//                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (ParkingBrakeData)");
-//                            param.setResult(null);
-//                            break;
-//                        case 7:
-//                            if (DEBUG) log(TAG, "Dropped CSE instance. b was " + b + " (GearData)");
-//                            param.setResult(null);
-//                            break;
-//                        default:
-//                    }
-//                }
-//            });
-
 
             XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "d", String.class, Integer.class,
                     new XC_MethodHook() {
@@ -81,24 +58,6 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                             }
                         }
                     });
-
-//            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "a", String.class, Float.class,
-//                    new XC_MethodHook() {
-//                        @Override
-//                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-//                            prefs.reload();
-//                            String s = (String) param.args[0];
-//                            float f = (float) param.args[1];
-//                            if (s.equals("gearhead:max_speed_unlimited_browsing") ||
-//                                    s.equals("gearhead:max_speed_parking_card")) {
-//                                if (DEBUG) log(TAG, s + " is currently: " + f);
-//                                float tmpflt = (float) prefs.getInt("pref_maxSpeed", 150) * 0.44704F;
-//                                param.args[1] = tmpflt;
-//                                if (DEBUG) log(TAG, "setting " + s + " to " +
-//                                        tmpflt);
-//                            }
-//                        }
-//                    });
 
             XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "E", Bundle.class,
                     new XC_MethodHook() {
