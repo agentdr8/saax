@@ -43,7 +43,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
         if (lpparam.packageName.equals(targetpkg)) {
             if (DEBUG) log(TAG, "Hooked Android Auto package");
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "d", String.class, Integer.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "c", String.class, Integer.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
