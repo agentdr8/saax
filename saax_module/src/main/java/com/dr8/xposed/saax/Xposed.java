@@ -1,24 +1,30 @@
 package com.dr8.xposed.saax;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import de.robv.android.xposed.IXposedHookInitPackageResources;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XSharedPreferences;
 import de.robv.android.xposed.XposedBridge;
 import de.robv.android.xposed.XposedHelpers;
+import de.robv.android.xposed.callbacks.XC_InitPackageResources;
+import de.robv.android.xposed.callbacks.XC_LayoutInflated;
 import de.robv.android.xposed.callbacks.XC_LoadPackage;
 
-public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
+public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit, IXposedHookInitPackageResources {
 
     private static boolean DEBUG = false;
     private static String TAG = "SAAX: ";
     private static XSharedPreferences prefs;
+    private static String targetpkg = "com.google.android.projection.gearhead";
 
     private static void log(String tag, String msg) {
         Calendar c = Calendar.getInstance();
@@ -36,7 +42,6 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-        String targetpkg = "com.google.android.projection.gearhead";
         String targetcls = "com.google.android.b.b";
         String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 
@@ -76,5 +81,29 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
         }
 
+    }
+
+    @Override
+    public void handleInitPackageResources(final XC_InitPackageResources.InitPackageResourcesParam initPackageResourcesParam) throws Throwable {
+        if (initPackageResourcesParam.packageName.equals(targetpkg)) {
+            prefs.reload();
+            if (prefs.getBoolean("bg", false)) {
+                if (DEBUG) log(TAG, "Hooking overview layout");
+                initPackageResourcesParam.res.hookLayout(targetpkg, "layout", "vn_overview_activity", new XC_LayoutInflated() {
+                    @Override
+                    public void handleLayoutInflated(LayoutInflatedParam layoutInflatedParam) throws Throwable {
+                        if (DEBUG) log(TAG, "Inside inflated layout");
+                        try {
+                            FrameLayout fl = (FrameLayout) layoutInflatedParam.view.findViewById(layoutInflatedParam.res.getIdentifier("full_facet", "id", targetpkg));
+                            Drawable bg = Drawable.createFromPath(prefs.getString("bgpath", ""));
+                            if (DEBUG) log(TAG, "injecting new background drawable");
+                            fl.setBackground(bg);
+                        } catch (Throwable t) {
+                            log(TAG, t.toString());
+                        }
+                    }
+                });
+            }
+        }
     }
 }

@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.dr8.xposed.saax"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 106
-        versionName "1.6"
+        versionCode 107
+        versionName "1.6a"
     }
     buildTypes {
         release {
@@ -23,4 +23,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     provided 'de.robv.android.xposed:api:82'
     compile project(':xposedLibrary')
+    compile 'com.github.angads25:filepicker:1.1.0'
 }
