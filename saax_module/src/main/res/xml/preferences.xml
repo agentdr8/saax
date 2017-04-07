@@ -42,29 +42,6 @@
 
     <de.robv.android.xposed.library.ui.SeparatorPreference height="3" />
 
-    <SwitchPreference
-        android:defaultValue="false"
-        android:key="bg"
-        android:disableDependentsState="true"
-        android:summaryOff="@string/bgoff"
-        android:summaryOn="@string/bgon"
-        android:title="@string/bgtitle" />
-
-    <com.github.angads25.filepicker.view.FilePickerPreference
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:key="bgpath"
-        android:title="@string/bgpickertitle"
-        android:summary="@string/bgpickersumm"
-        android:defaultValue="/sdcard"
-        app:titleText="Select Image File"
-        app:error_dir="/sdcard"
-        app:root_dir="/sdcard"
-        app:selection_mode="single_mode"
-        app:selection_type="file_select"
-        app:extensions="png:jpg:bmp:jpeg"/>
-
-    <de.robv.android.xposed.library.ui.SeparatorPreference height="3" />
-
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="debug"
