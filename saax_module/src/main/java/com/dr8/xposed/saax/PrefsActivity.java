@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -25,6 +26,14 @@ public class PrefsActivity extends PreferenceActivity {
 
         prefs = getSharedPreferences("com.dr8.xposed.saax_preferences", MODE_WORLD_READABLE);
         isFirstRun();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String newValue = data.getStringExtra("imgpath");
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("bgpath", newValue);
+        editor.apply();
     }
 
     @Override

@@ -14,4 +14,9 @@
 
     <string name="debug_title">Debug</string>
     <string name="debug_summary">Enable debug output to log to Xposed error.log</string>
+    <string name="bgoff">AA will use default background image</string>
+    <string name="bgon">Override AA background image</string>
+    <string name="bgtitle">Custom AA background image</string>
+    <string name="bgpickertitle">Select background image</string>
+    <string name="bgpickersumm">Browse your storage and select an image file</string>
 </resources>
