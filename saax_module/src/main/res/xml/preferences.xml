@@ -17,23 +17,13 @@
         android:summary="@string/vsb1summary"
         android:title="@string/vsb1title" />
 
-    <de.robv.android.xposed.library.ui.ValueSeekBarPreference
-        displayFormat="%d mph"
-        max="150"
-        min="1"
-        android:defaultValue="1"
-        android:key="pref_maxSpeed"
-        android:summary="@string/vsb2summary"
-        android:title="@string/vsb2title" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="pref_ratelimit"
+        android:summaryOn="@string/cb1summaryon"
+        android:summaryOff="@string/cb1summaryoff"
+        android:title="@string/cb1title" />
 
-    <de.robv.android.xposed.library.ui.ValueSeekBarPreference
-        displayFormat="%d pages"
-        max="999"
-        min="5"
-        android:defaultValue="100"
-        android:key="pref_maxPages"
-        android:summary="@string/vsb3summary"
-        android:title="@string/vsb3title" />
 
     <de.robv.android.xposed.library.ui.TextViewPreference
         android:selectable="false"

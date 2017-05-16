@@ -19,4 +19,7 @@
     <string name="bgtitle">Custom AA background image</string>
     <string name="bgpickertitle">Select background image</string>
     <string name="bgpickersumm">Browse your storage and select an image file</string>
+    <string name="cb1title">Content rate limiting</string>
+    <string name="cb1summaryon">Content rate limit disabled</string>
+    <string name="cb1summaryoff">Content rate limit enabled</string>
 </resources>
