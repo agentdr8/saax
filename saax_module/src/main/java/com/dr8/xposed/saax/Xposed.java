@@ -78,6 +78,11 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                                     if (DEBUG) log(TAG, "setting " + s + " to true");
                                 }
                             }
+                            if (s.equals("gearhead:feature_vanagon_unlimited_browse_speed_bump")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                param.args[1] = false;
+                                if (DEBUG) log(TAG, s + " is now: false");
+                            }
                         }
                     });
 
