@@ -34,11 +34,13 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
-//        String targetcls = "com.google.android.b.b";
-        String targetcls = "cvu";
+//      String targetcls = "com.google.android.b.b";
+//      String targetcls = "cvu";
+        String targetcls = "cyi";
 
-//        String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
-        String targetcls2 = "awk";
+//      String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
+//      String targetcls2 = "awk";
+        String targetcls2 = "awc";
 
         String targetpkg = "com.google.android.projection.gearhead";
         if (lpparam.packageName.equals(targetpkg)) {
