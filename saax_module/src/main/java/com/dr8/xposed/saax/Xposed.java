@@ -125,47 +125,6 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 
                         }
                     });
-
-//            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "E", Bundle.class,
-//                    new XC_MethodHook() {
-//                        @Override
-//                        protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-//                            prefs.reload();
-//                            Bundle b = (Bundle) param.args[0];
-//                            int pages = b.getInt("com.google.android.projection.gearhead.sdk.MAX_PAGES");
-//                            if (DEBUG) log(TAG, "MAX_PAGES is " + pages + ", setting to " + prefs.getInt("pref_maxPages",
-//                                    5));
-//                            b.putInt("com.google.android.projection.gearhead.sdk.MAX_PAGES", prefs.getInt("pref_maxPages",
-//                                    5));
-//                        }
-//
-//                    });
-
         }
-
     }
-
-//    @Override
-//    public void handleInitPackageResources(final XC_InitPackageResources.InitPackageResourcesParam initPackageResourcesParam) throws Throwable {
-//        if (initPackageResourcesParam.packageName.equals(targetpkg)) {
-//            prefs.reload();
-//            if (prefs.getBoolean("bg", false)) {
-//                if (DEBUG) log(TAG, "Hooking overview layout");
-//                initPackageResourcesParam.res.hookLayout(targetpkg, "layout", "vn_overview_activity", new XC_LayoutInflated() {
-//                    @Override
-//                    public void handleLayoutInflated(LayoutInflatedParam layoutInflatedParam) throws Throwable {
-//                        if (DEBUG) log(TAG, "Inside inflated layout");
-//                        try {
-//                            FrameLayout fl = (FrameLayout) layoutInflatedParam.view.findViewById(layoutInflatedParam.res.getIdentifier("full_facet", "id", targetpkg));
-//                            Drawable bg = Drawable.createFromPath(prefs.getString("bgpath", ""));
-//                            if (DEBUG) log(TAG, "injecting new background drawable");
-//                            fl.setBackground(bg);
-//                        } catch (Throwable t) {
-//                            log(TAG, t.toString());
-//                        }
-//                    }
-//                });
-//            }
-//        }
-//    }
 }
