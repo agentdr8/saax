@@ -17,6 +17,15 @@
         android:summary="@string/vsb1summary"
         android:title="@string/vsb1title" />
 
+    <de.robv.android.xposed.library.ui.ValueSeekBarPreference
+        displayFormat="%d MPH"
+        max="999"
+        min="1"
+        android:defaultValue="150"
+        android:key="pref_maxSensorSpeed"
+        android:summary="@string/vsb2summary"
+        android:title="@string/vsb2title" />
+
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="pref_ratelimit"
@@ -24,6 +33,12 @@
         android:summaryOff="@string/cb1summaryoff"
         android:title="@string/cb1title" />
 
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="pref_passMode"
+        android:summaryOn="@string/cb2summaryon"
+        android:summaryOff="@string/cb2summaryoff"
+        android:title="@string/cb2title" />
 
     <de.robv.android.xposed.library.ui.TextViewPreference
         android:selectable="false"

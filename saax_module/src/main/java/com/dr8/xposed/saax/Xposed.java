@@ -37,12 +37,14 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //      String targetcls = "com.google.android.b.b";
 //      String targetcls = "cvu"; 2.4.72280*
 //      String targetcls = "cyi"; 2.4.72290*
-        String targetcls = "dgi";
+//      String targetcls = "dgi"; 2.5.72860*
+        String targetcls = "dlg";
 
 //      String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 //      String targetcls2 = "awk"; 2.4.72280*
 //      String targetcls2 = "awc"; 2.4.72290*
-        String targetcls2 = "awr";
+//      String targetcls2 = "awr"; 2.5.72860*
+        String targetcls2 = "axw";
 
         String targetpkg = "com.google.android.projection.gearhead";
         if (lpparam.packageName.equals(targetpkg)) {
@@ -60,6 +62,22 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                                 param.args[1] = prefs.getInt("pref_maxTaps", 6);
                                 if (DEBUG) log(TAG, "setting " + s + " to " +
                                         prefs.getInt("pref_maxTaps", 6));
+                            }
+                        }
+                    });
+
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "i", String.class, Boolean.class,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            prefs.reload();
+                            String s = (String) param.args[0];
+                            boolean i = (boolean) param.args[1];
+                            if (s.equals("gearhead:passenger_mode_feature_enabled")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                param.args[1] = prefs.getBoolean("pref_passMode", true);
+                                if (DEBUG) log(TAG, "setting " + s + " to " +
+                                        prefs.getBoolean("pref_passMode", true));
                             }
                         }
                     });
@@ -90,6 +108,23 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
+
+            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "a", String.class, Float.class,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            prefs.reload();
+                            String s = (String) param.args[0];
+                            float i = (float) param.args[1];
+                            if (s.equals("gearhead:max_parked_speed_wheel_sensor") || s.equals("gearhead:max_parked_speed_gps_sensor")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                float tmpflt = (float) prefs.getInt("pref_maxSensorSpeed", 150) * 0.44704F;
+                                param.args[1] = tmpflt;
+                                if (DEBUG) log(TAG, "setting " + s + " to " + tmpflt);
+                            }
+
+                        }
+                    });
 
 //            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "E", Bundle.class,
 //                    new XC_MethodHook() {
