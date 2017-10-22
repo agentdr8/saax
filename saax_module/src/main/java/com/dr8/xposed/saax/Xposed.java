@@ -68,7 +68,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "i", String.class, boolean.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "j", String.class, boolean.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
