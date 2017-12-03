@@ -38,15 +38,17 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //      String targetcls = "cvu"; 2.4.72280*
 //      String targetcls = "cyi"; 2.4.72290*
 //      String targetcls = "dgi"; 2.5.72860*
-//        String targetcls = "dlg"; 2.6.57340*
-        String targetcls = "dof";
+//      String targetcls = "dlg"; 2.6.57340*
+//      String targetcls = "dof"; 2.7.57395*
+        String targetcls = "dsp";
 
 //      String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 //      String targetcls2 = "awk"; 2.4.72280*
 //      String targetcls2 = "awc"; 2.4.72290*
 //      String targetcls2 = "awr"; 2.5.72860*
-//        String targetcls2 = "axw"; 2.6.57340*
-        String targetcls2 = "azd";
+//      String targetcls2 = "axw"; 2.6.57340*
+//      String targetcls2 = "azd"; 2.7.57395*
+        String targetcls2 = "bbm";
 
         String targetpkg = "com.google.android.projection.gearhead";
         if (lpparam.packageName.equals(targetpkg)) {
@@ -68,7 +70,7 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "j", String.class, boolean.class,
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "i", String.class, boolean.class,
                     new XC_MethodHook() {
                         @Override
                         protected void beforeHookedMethod(MethodHookParam param) throws Throwable {

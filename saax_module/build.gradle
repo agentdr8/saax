@@ -2,14 +2,13 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "com.dr8.xposed.saax"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 114
-        versionName "1.7.5a"
+        versionCode 115
+        versionName "1.7.6"
     }
     buildTypes {
         release {
