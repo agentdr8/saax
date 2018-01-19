@@ -40,7 +40,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //      String targetcls = "dgi"; 2.5.72860*
 //      String targetcls = "dlg"; 2.6.57340*
 //      String targetcls = "dof"; 2.7.57395*
-        String targetcls = "dsp";
+//      String targetcls = "dsp"; 2.8.574*
+        String targetcls = "dut";
 
 //      String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 //      String targetcls2 = "awk"; 2.4.72280*
@@ -48,7 +49,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //      String targetcls2 = "awr"; 2.5.72860*
 //      String targetcls2 = "axw"; 2.6.57340*
 //      String targetcls2 = "azd"; 2.7.57395*
-        String targetcls2 = "bbm";
+//      String targetcls2 = "bbm"; 2.8.574*
+        String targetcls2 = "bds";
 
         String targetpkg = "com.google.android.projection.gearhead";
         if (lpparam.packageName.equals(targetpkg)) {
