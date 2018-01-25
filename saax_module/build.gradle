@@ -7,8 +7,8 @@ android {
         applicationId "com.dr8.xposed.saax"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 116
-        versionName "1.7.7"
+        versionCode 117
+        versionName "1.7.8"
     }
     buildTypes {
         release {
