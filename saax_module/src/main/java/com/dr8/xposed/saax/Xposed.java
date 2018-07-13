@@ -41,7 +41,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //      String targetcls = "dlg"; 2.6.57340*
 //      String targetcls = "dof"; 2.7.57395*
 //      String targetcls = "dsp"; 2.8.574*
-        String targetcls = "dut";
+//      String targetcls = "dut"; 2.9.x
+        String targetcls = "egh";
 
 //      String targetcls2 = "com.google.android.projection.gearhead.sdk.b";
 //      String targetcls2 = "awk"; 2.4.72280*
@@ -50,7 +51,8 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
 //      String targetcls2 = "axw"; 2.6.57340*
 //      String targetcls2 = "azd"; 2.7.57395*
 //      String targetcls2 = "bbm"; 2.8.574*
-        String targetcls2 = "bds";
+//      String targetcls2 = "bds"; 2.9.x
+        String targetcls2 = "azg";
 
         String targetpkg = "com.google.android.projection.gearhead";
         if (lpparam.packageName.equals(targetpkg)) {
@@ -88,6 +90,23 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
+            XposedHelpers.findAndHookMethod(targetcls, lpparam.classLoader, "c", String.class, Float.class,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            prefs.reload();
+                            String s = (String) param.args[0];
+                            float i = (float) param.args[1];
+                            if (s.equals("gearhead:max_parked_speed_wheel_sensor") || s.equals("gearhead:max_parked_speed_gps_sensor")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                float tmpflt = (float) prefs.getInt("pref_maxSensorSpeed", 150) * 0.44704F;
+                                param.args[1] = tmpflt;
+                                if (DEBUG) log(TAG, "setting " + s + " to " + tmpflt);
+                            }
+
+                        }
+                    });
+
             XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "a", String.class, Boolean.class,
                     new XC_MethodHook() {
                         @Override
@@ -114,7 +133,6 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                         }
                     });
 
-
             XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "a", String.class, Float.class,
                     new XC_MethodHook() {
                         @Override
@@ -122,15 +140,39 @@ public class Xposed implements IXposedHookLoadPackage, IXposedHookZygoteInit {
                             prefs.reload();
                             String s = (String) param.args[0];
                             float i = (float) param.args[1];
-                            if (s.equals("gearhead:max_parked_speed_wheel_sensor") || s.equals("gearhead:max_parked_speed_gps_sensor")) {
+                            if (s.equals("gearhead:content_browse_permit_per_sec")) {
                                 if (DEBUG) log(TAG, s + " is currently: " + i);
-                                float tmpflt = (float) prefs.getInt("pref_maxSensorSpeed", 150) * 0.44704F;
-                                param.args[1] = tmpflt;
-                                if (DEBUG) log(TAG, "setting " + s + " to " + tmpflt);
+                                if (DEBUG) log(TAG, "Setting " + s + " to 999F");
+                                param.args[1] = 999F;
                             }
-
+                            if (s.equals("gearhead:content_browse_max_stored_permits")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                if (DEBUG) log(TAG, "Setting " + s + " to 999F");
+                                param.args[1] = 999F;
+                            }
+                            if (s.equals("gearhead:content_browse_permits_after_speed_bump")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                if (DEBUG) log(TAG, "Setting " + s + " to 999F");
+                                param.args[1] = 999F;
+                            }
                         }
                     });
+
+            XposedHelpers.findAndHookMethod(targetcls2, lpparam.classLoader, "a", String.class, Long.class,
+                    new XC_MethodHook() {
+                        @Override
+                        protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
+                            prefs.reload();
+                            String s = (String) param.args[0];
+                            long i = (long) param.args[1];
+                            if (s.equals("gearhead:content_browse_speed_bump_duration_ms")) {
+                                if (DEBUG) log(TAG, s + " is currently: " + i);
+                                if (DEBUG) log(TAG, "Setting " + s + " to 0L");
+                                param.args[1] = 0L;
+                            }
+                        }
+                    });
+
         }
     }
 }
